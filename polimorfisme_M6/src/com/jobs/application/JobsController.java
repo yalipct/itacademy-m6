@@ -20,39 +20,93 @@ public class JobsController {
 		
 	}
 	
-	public void createBossEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		Boss boss = new Boss(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateBoss());
-		repository.addMember(boss);
-		boss.pay();
+	public void createBossEmployee(String name, String address, String phone, double salaryPerMonth){		
+		try {
+			Boss boss = new Boss(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateBoss());
+			repository.addMember(boss);
+			boss.pay();
+		} catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{
-		Manager manager = new Manager(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateManager());
-		repository.addMember(manager);
-		manager.pay();
+	public void createManagerEmployee(String name, String address, String phone, double salaryPerMonth){
+		try{
+			Manager manager = new Manager(name, address, phone, salaryPerMonth, PaymentFactory.createPaymentRateManager());
+			repository.addMember(manager);
+			manager.pay();
+		} catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void createSeniorEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		Senior senior = new Senior(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateSenior());
-		repository.addMember(senior);
-		senior.pay();
+	public void createSeniorEmployee(String name, String address, String phone, double salaryPerMonth){		
+		try {
+			Senior senior = new Senior(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateSenior());
+			repository.addMember(senior);
+			senior.pay();
+		} catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void createMidEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		Mid mid = new Mid(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateMid());
-		repository.addMember(mid);
-		mid.pay();
+	public void createMidEmployee(String name, String address, String phone, double salaryPerMonth){		
+		try {
+			Mid mid = new Mid(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateMid());
+			repository.addMember(mid);
+			mid.pay();
+		} catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void createJuniorEmployee(String name, String address, String phone, double salaryPerMonth) throws Exception{		
-		Junior junior = new Junior(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateJunior());
-		repository.addMember(junior);
-		junior.pay();
+	public void createJuniorEmployee(String name, String address, String phone, double salaryPerMonth){		
+		try {
+			Junior junior = new Junior(name, address, phone,  salaryPerMonth, PaymentFactory.createPaymentRateJunior());
+			repository.addMember(junior);
+			junior.pay();
+		}catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 	
-	public void createVolunteer(String name, String address, String phone, String description, double ayuda) throws Exception{		
-		Volunteer volunteer = new Volunteer(name, address, phone,  description, ayuda);
-		repository.addMember(volunteer);
+	public void createVolunteer(String name, String address, String phone, String description, double ayuda){		
+		try {
+			Volunteer volunteer = new Volunteer(name, address, phone, description, ayuda);
+			repository.addMember(volunteer);
+		} catch (SalaryException e) {
+			System.err.println(e.getMessage());
+		}catch(CamposVacios e) {
+			System.err.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -70,15 +124,21 @@ public class JobsController {
 
 	public String getAllEmployees() {
 		
-		String allEmployes="";
+		//String allEmployes="";
 		
 		List<AbsStaffMember> allMembers=repository.getAllMembers();
 		
-		for(AbsStaffMember employee: allMembers) {
-			allEmployes += employee + " \n";
+		StringBuffer res= new StringBuffer(); //--> para evitar hacer el + (allEmployes += employee + " \n")
+		//es mejor opción
+		
+		for(AbsStaffMember employee: allMembers) {			
+			
+			res.append(employee);
+			
+			//allEmployes += employee + " \n";
 					
 		}
-		return allEmployes;
+		return res.toString(); //allEmployes;
 	}
 	
 	public void Bonus() {

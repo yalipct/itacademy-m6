@@ -1,5 +1,7 @@
 package com.jobs.domain;
 
+import com.jobs.application.SalaryException;
+
 public class Volunteer extends AbsStaffMember {
 	
 	protected String description;

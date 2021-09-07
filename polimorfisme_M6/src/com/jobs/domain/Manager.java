@@ -1,5 +1,7 @@
 package com.jobs.domain;
 
+import com.jobs.application.SalaryException;
+
 public class Manager extends Employee {
 	
 	private static final double SUELDO_MINIMO = 3000.00;

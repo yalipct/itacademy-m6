@@ -1,5 +1,8 @@
 package com.jobs.domain;
 
+import com.jobs.application.CamposVacios;
+import com.jobs.application.SalaryException;
+
 public class Senior extends Employee{
 	
 	private static final double SUELDO_MINIMO = 2700.00;
@@ -7,12 +10,12 @@ public class Senior extends Employee{
 	private static final int IRPF = 24;
 	
 	
-	public Senior(String name, String address, String phone, double salaryPerMonth, IPaymentRate paymentRate) throws Exception {
+	public Senior(String name, String address, String phone, double salaryPerMonth, IPaymentRate paymentRate) throws SalaryException, CamposVacios {
 		super(name, address, phone, salaryPerMonth, paymentRate, SUELDO_MINIMO, SUELDO_MAXIMO, IRPF);
 		
 		if(salaryPerMonth<0 || (salaryPerMonth<SUELDO_MINIMO || salaryPerMonth>SUELDO_MAXIMO)) throw new SalaryException(SalaryException.VALOR_SALARIO_SENIOR);
 			
-		if(paymentRate==null) throw new Exception();
+		if(paymentRate==null) throw new SalaryException(SalaryException.PAYMENT_RATE);
 	
 	}
 	

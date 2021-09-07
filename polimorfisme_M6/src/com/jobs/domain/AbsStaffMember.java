@@ -2,6 +2,8 @@ package com.jobs.domain;
 
 import java.text.*;
 
+import com.jobs.application.CamposVacios;
+
 public abstract class AbsStaffMember {
 
 	protected NumberFormat formato = new DecimalFormat("#€0.00");
@@ -15,13 +17,13 @@ public abstract class AbsStaffMember {
 
 	private static int COUNTER_MEMBERS = 1;
 
-	public AbsStaffMember(String name, String address, String phone) throws Exception {
+	public AbsStaffMember(String name, String address, String phone) throws CamposVacios {
 		if (name.equals(""))
-			throw new Exception();
+			throw new CamposVacios("El campo name del empleado " + name + CamposVacios.CAMPO_VACIO);
 		if (address.equals(""))
-			throw new Exception();
+			throw new CamposVacios("El campo address del empleado " + name + CamposVacios.CAMPO_VACIO);
 		if (phone.equals(""))
-			throw new Exception();
+			throw new CamposVacios("El campo phone del empleado " + name + CamposVacios.CAMPO_VACIO);
 
 		this.name = name;
 		this.address = address;

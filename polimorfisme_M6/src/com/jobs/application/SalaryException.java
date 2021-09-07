@@ -1,4 +1,4 @@
-package com.jobs.domain;
+package com.jobs.application;
 
 public class SalaryException extends Exception {
 	
